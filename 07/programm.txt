@@ -1,0 +1,28 @@
+10: 7C0A  --  R[C] = A # R[C] = 10
+11: 7101  --  R[1] = 1
+12: 7201  --  R[2] = 1
+13: 1222  --  R[2] = R[2] + R[2] # 
+14: 2CC1  --  R[C] = R[C] - R[1] # R[2] = 10 - 1 = 9
+15: DC13  --  if (R[C] > 0) PC = 13
+16: 0000
+
+int rc = 10;
+int r1 = 1;
+int r2 = 1;
+
+while(rc > 0) {
+  r2 = r2+r2   // rc = 2*rc;
+  rc = rc-r1;  // rc--;
+}
+
+2, 4, 8, 16, 32, 64, 128, 256
+2^1, 2^2, 2^3, ... 2^10
+
+and you set the PC to 10 and press RUN. Give the decimal number represented by the contents of R[2] when the machine halts.
+
+7C0A 7101 7201 1222 2CC1 DC13 0000
+
+prg=['0x7C0A', '0x7101', '0x7201', '0x1222', '0x2CC1', '0xDC13', '00000']
+>>> [bin(int(n, 0)) for n in prg]
+['0b111110000001010', '0b111000100000001', '0b111001000000001', '0b1001000100010', '0b10110011000001', '0b1101110000010011', '0b0']
+>
